@@ -13,9 +13,24 @@ class Connection
     {
         if (self::$pdo === null) {
             try {
-                self::$pdo = new PDO('sqlite:' . DatabaseConfig::PATH);
+                // Ambil path dari konfigurasi
+                $path = DatabaseConfig::PATH;
+                $folder = dirname($path);
+
+                // Buat folder jika belum ada
+                if (!is_dir($folder)) {
+                    mkdir($folder, 0755, true);
+                }
+
+                // Cek apakah file database belum ada
+                $isNewDatabase = !file_exists($path);
+                // Koneksi PDO
+                self::$pdo = new PDO('sqlite:' . $path);
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                self::bootstrap();
+                // jika database baru, jalankan bootstrap
+                if($isNewDatabase) {
+                    self::bootstrap();
+                }
             } catch (PDOException $e) {
                 exit('Database connection failed: ' . $e->getMessage());
             }
