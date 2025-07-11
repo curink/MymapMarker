@@ -1,23 +1,3 @@
-<?php
-require_once __DIR__ . "/../vendor/autoload.php";
-
-use App\Models\Location;
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $address = $_POST["address"] ?? "";
-  $lat = (float) ($_POST["lat"] ?? 0);
-  $lng = (float) ($_POST["lng"] ?? 0);
-
-  if ($address && $lat && $lng) {
-    Location::create($address, $lat, $lng);
-  }
-    // Redirect balik ke index setelah simpan
-    header("Location: index.php");
-    exit();
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <h1>📍 Simpan Lokasi</h1>
-    <form method="POST" class="card">
+    <form action="add" method="POST" class="card">
         <div class="grid">
             <input type="text" name="address" placeholder="Address" required>
             <input type="number" step="any" name="lat" placeholder="Latitude" value='<?= $_GET["lat"] ?>' required>
@@ -36,6 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <button type="submit">Simpan</button>
         </div>
     </form>
-    <p><a href="index.php">← Kembali</a></p>
+    <p><a href="/">← Kembali</a></p>
 </body>
 </html>

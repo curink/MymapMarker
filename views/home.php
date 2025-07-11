@@ -1,17 +1,9 @@
-<?php
-
-require_once __DIR__ . "/../vendor/autoload.php";
-
-use App\Models\Location;
-
-$locations = Location::all();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📍 Futuristic Location Manager</title>
+  <title>📍 Marker Location Manager</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.84.2/dist/L.Control.Locate.min.css" />
   <link href="/assets/Leaflet.AnimatedSearchBox.css" rel="stylesheet">
@@ -20,7 +12,7 @@ $locations = Location::all();
   <link href="/assets/style.css" rel="stylesheet">
 </head>
 <body>
-  <h1>📍 Futuristic Location Manager</h1>
+  <h1>📍 Marker Location Manager</h1>
   <div id="map" style="width: 97%; height: 75vh"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.84.2/dist/L.Control.Locate.min.js" charset="utf-8"></script>
@@ -98,7 +90,7 @@ $locations = Location::all();
           map.removeLayer(marker);
         };
         marker = L.marker(clickedLatLng).addTo(map);
-        marker.bindPopup(latitude.toFixed(6) +','+ longitude.toFixed(6) + '<br><a href="geo:0,0?q=' + latitude + ',' + longitude + '" target="_blank">Open Map</a> &nbsp &nbsp<a href="form.php?lat=' + latitude + '&lng=' + longitude  + '">Add</a>').openPopup();
+        marker.bindPopup(latitude.toFixed(6) +','+ longitude.toFixed(6) + '<br><a href="geo:0,0?q=' + latitude + ',' + longitude + '" target="_blank">Open Map</a> &nbsp &nbsp<a href="form?lat=' + latitude + '&lng=' + longitude  + '">Add</a>').openPopup();
       });
       
       function search() {
@@ -117,7 +109,7 @@ $locations = Location::all();
       }
       
       function onpop(d1,d2,d3,d4){
-        return L.marker([d3,d4]).addTo(map).bindPopup(d2 + '<br><a href="geo:0,0?q=' + d3 + ',' + d4 + '">Nav</a> <a href="/edit.php?id=' + d1 + '">Edit</a> <a href="/delete.php?id=' + d1 + '">Hapus</a>').on('click', function(e){map.removeLayer(marker)});
+        return L.marker([d3,d4]).addTo(map).bindPopup(d2 + '<br><a href="geo:0,0?q=' + d3 + ',' + d4 + '">Nav</a> <a href="/edit/' + d1 + '">Edit</a> <a href="/destroy/' + d1 + '">Hapus</a>').on('click', function(e){map.removeLayer(marker)});
       }
     </script>
 </body>
