@@ -15,7 +15,7 @@ $routes = [
     'PUT'  => [
          'update/{id}' => [HomeController::class, 'update']
      ],
-//      'GET' => [
-//          'destroy/{id}' => [UserController::class, 'destroy']
-//      ]
+      'DELETE' => [
+          'destroy/{id}' => [HomeController::class, 'destroy']
+      ]
 ];

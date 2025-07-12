@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <a href="/" class="btn-floating-back">← Kembali</a>
     <h1>📍 Simpan Lokasi</h1>
     <form action="add" method="POST" class="card">
         <div class="grid">
@@ -16,6 +17,5 @@
             <button type="submit">Simpan</button>
         </div>
     </form>
-    <p><a href="/">← Kembali</a></p>
 </body>
 </html>

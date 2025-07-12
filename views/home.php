@@ -90,7 +90,7 @@
           map.removeLayer(marker);
         };
         marker = L.marker(clickedLatLng).addTo(map);
-        marker.bindPopup(latitude.toFixed(6) +','+ longitude.toFixed(6) + '<br><a href="geo:0,0?q=' + latitude + ',' + longitude + '" target="_blank">Open Map</a> &nbsp &nbsp<a href="form?lat=' + latitude + '&lng=' + longitude  + '">Add</a>').openPopup();
+        marker.bindPopup(`<h2 class="popup-title">${latitude.toFixed(6)},${longitude.toFixed(6)}</h2><div class="popup-actions"><button onclick="window.location.href='geo:0,0?q=${latitude},${longitude}'" target="_blank">Nav</button><button onclick="window.location.href='form?lat=${latitude}&lng=${longitude}'">Add</button></div>`).openPopup();
       });
       
       function search() {
@@ -108,8 +108,10 @@
         }, 600);
       }
       
-      function onpop(d1,d2,d3,d4){
-        return L.marker([d3,d4]).addTo(map).bindPopup(d2 + '<br><a href="geo:0,0?q=' + d3 + ',' + d4 + '">Nav</a> <a href="/edit/' + d1 + '">Edit</a> <a href="/destroy/' + d1 + '">Hapus</a>').on('click', function(e){map.removeLayer(marker)});
+      function onpop(d1, d2, d3, d4) {
+        const popupContent = `<h2 class="popup-title">${d2}</h2><div class="popup-actions"><button class="btn-nav" onclick="window.location.href='geo:0,0?q=${d3},${d4}'">Nav</button><button class="btn-nav" onclick="window.location.href='/edit/${d1}'">Edit</button><form action="/destroy/${d1}" method="POST" onsubmit="return confirm(&quot;Yakin hapus?&quot;)"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn-delete">Hapus</button></form></div>`;
+        
+        return L.marker([d3, d4]).addTo(map).bindPopup(popupContent).on('click', function () {map.removeLayer(marker)});
       }
     </script>
 </body>

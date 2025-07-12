@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
+  <a href="/" class="btn-floating-back">← Kembali</a>
     <h1>📍 Edit Lokasi</h1>
     <form action="/update/<?=$locations['id']?>" method="POST" class="card">
         <div class="grid">
@@ -17,7 +18,6 @@
             <button type="submit">Ubah</button>
         </div>
     </form>
-    <p><a href="/">← Kembali</a></p>
 </body>
 </html>
 <script>
